@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import './widgets/add_account.dart';
-
 import './widgets/creat_pwd.dart';
 
 void main(List<String> args) {
