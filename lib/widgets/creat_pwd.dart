@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../module/password_genrator.dart';
 
@@ -59,6 +60,7 @@ class _CreatePWDState extends State<CreatePWD> {
                   labelText: "length",
                   border: OutlineInputBorder(),
                 ),
+                keyboardType: TextInputType.number,
               ),
             ),
             RaisedButton(

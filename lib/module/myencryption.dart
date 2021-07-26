@@ -5,11 +5,13 @@ class MyEncryption {
   static final iv = IV.fromLength(8);
   static final encrypter = Encrypter(AES(key));
 
-  static encrpte(String plainText) {
-    return encrypter.encrypt(plainText, iv: iv);
+  static encrpteASE(String plainText) {
+    var chiper = encrypter.encrypt(plainText, iv: iv).base64;
+
+    return chiper;
   }
 
-  static decrypte(Encrypted chiperText) {
+  static decrypteASE(Encrypted chiperText) {
     return encrypter.decrypt(chiperText, iv: iv);
   }
 }

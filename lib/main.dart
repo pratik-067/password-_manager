@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import './widgets/add_account.dart';
-import './widgets/creat_pwd.dart';
+
+import './module/local_auth.dart';
+import './widgets/home_page.dart';
 
 void main(List<String> args) {
   runApp(PassManager());
@@ -15,69 +16,57 @@ class _PassManagerState extends State<PassManager> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Password Manager",
-      home: Home(),
+      home: Login(),
     );
   }
 }
 
-class Home extends StatelessWidget {
+class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
-      appBar: AppBar(
-        backgroundColor: Colors.purpleAccent,
-        title: Text("My Password"),
-        actions: [
-          IconButton(
-              icon: Icon(Icons.search), color: Colors.white, onPressed: null),
-          IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => AddAccount()));
-              })
-        ],
-      ),
-      body: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.fromLTRB(10, 10, 15, 15),
-            padding: EdgeInsets.all(12),
-            width: 150,
-            height: 150,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(200),
-                color: Colors.lightBlue),
-            child: Card(
-              child: TextButton(
-                child: Text(
-                  "Password generate",
-                  textAlign: TextAlign.center,
+      backgroundColor: Color(0xFF3CE52),
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+        child: Column(
+          children: [
+            Center(
+              child: Text(
+                "Login",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 48.0,
+                  fontWeight: FontWeight.bold,
                 ),
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => CreatePWD()));
-                },
               ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(10, 10, 15, 15),
-            padding: EdgeInsets.all(12),
-            width: 150,
-            height: 150,
-            child: Card(
-              child: TextButton(
-                child: Text(
-                  "My Accounts",
-                  textAlign: TextAlign.center,
-                ),
-                onPressed: null,
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 50.0),
+              child: Column(
+                children: [
+                  Text(
+                    "Fingrtprint Auth",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  ElevatedButton(
+                    child: Text("Athunticate"),
+                    onPressed: () async {
+                      if (await LocalAuth.authenticate()) {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => Home()));
+                      } else {}
+                    },
+                  )
+                ],
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
